@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TheOooApp</string>
+    <string name="choose_an_ooo_from_the_drop_down_and_press_play">Choose an Ooofrom the drop down, and press play!</string>
+    <string name="play">Play\!</string>
+    <string name="the_ooo_app">The Ooo App</string>
+
+    <string-array name="spinner_options">
+        <item name="Ooooo">Ooooo</item>
+        <item name="Long_Oooo">Long Oooo</item>
+        <item name="Ooo_ooo_ooo">Ooo Ooo Ooo</item>
+        <item name="Ooo_Im_telling">Ooooooo I\'m tellinnnggggg</item>
+    </string-array>
+
+</resources>
