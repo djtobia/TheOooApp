@@ -1,5 +1,6 @@
 package djtboia.theoooapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -29,6 +30,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         spinnerDropdown = (Spinner) findViewById(R.id.spinner_dropdown);
         spinnerDropdown.setAdapter(adapter);
         spinnerDropdown.setOnItemSelectedListener(MainActivity.this);
+
 
         btnPlay = (Button) findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new playListener());

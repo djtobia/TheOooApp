@@ -5,20 +5,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
     tools:context="djtboia.theoooapp.MainActivity"
 
     >
 
     <RelativeLayout
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@android:color/darker_gray">
 
         <Spinner
             android:layout_width="match_parent"
@@ -27,17 +28,8 @@
             android:layout_marginBottom="58dp"
             android:layout_above="@+id/btnPlay"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/choose_an_ooo_from_the_drop_down_and_press_play"
-            android:id="@+id/OooLabel"
-            android:layout_marginTop="57dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:text="Pause"
@@ -46,18 +38,30 @@
             android:background="@android:color/holo_purple"
             android:layout_height="30dp"
             android:layout_below="@+id/spinner_dropdown"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_an_ooo_from_the_drop_down_and_press_play"
+            android:id="@+id/OooLabel"
+            android:layout_marginTop="59dp"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
         <Button
             android:text="Play"
-            android:layout_marginBottom="49dp"
+            android:layout_marginBottom="48dp"
             android:id="@+id/btnPlay"
             android:background="@android:color/holo_green_dark"
             android:layout_width="100dp"
             android:layout_height="30dp"
+            android:textColor="#FFFFFF"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignLeft="@+id/OooLabel"
+            android:layout_alignStart="@+id/OooLabel" />
 
         <Button
             android:text="Stop"
@@ -65,9 +69,10 @@
             android:id="@+id/btnStop"
             android:background="@android:color/holo_red_light"
             android:layout_height="30dp"
+            android:textColor="#FFFFFF"
             android:layout_below="@+id/spinner_dropdown"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignRight="@+id/OooLabel"
+            android:layout_alignEnd="@+id/OooLabel" />
 
     </RelativeLayout>
 
