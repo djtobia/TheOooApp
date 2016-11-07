@@ -15,12 +15,14 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
 
     Spinner spinnerDropdown;
     ArrayAdapter adapter;
-    Button btnPlay;
-
+    Button btnPlay, btnStop, btnResume, btnPause;
+    boolean startFlag;
+    MediaPlayer longOoo, shortOoo, threeOoo, telling;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startFlag = false;
 
         adapter = ArrayAdapter.createFromResource(this, R.array.spinner_options, android.R.layout.simple_spinner_item);
 
@@ -29,7 +31,13 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         spinnerDropdown.setOnItemSelectedListener(MainActivity.this);
 
         btnPlay = (Button) findViewById(R.id.btnPlay);
-        btnPlay.setOnClickListener(new onClickListener());
+        btnPlay.setOnClickListener(new playListener());
+        btnStop = (Button) findViewById(R.id.btnStop);
+        btnStop.setOnClickListener(new stopListener());
+
+        btnPause = (Button) findViewById(R.id.btnPause);
+        btnPause.setOnClickListener(new pauseListener());
+        longOoo = MediaPlayer.create(MainActivity.this, R.raw.oooolong);
     }
 
     @Override
@@ -42,19 +50,26 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
 
     }
 
-    public class onClickListener implements View.OnClickListener {
-        boolean startFlag = false;
-        MediaPlayer longOoo = MediaPlayer.create(MainActivity.this, R.raw.oooolong);
+    public class playListener implements View.OnClickListener {
+
+
+
         @Override
         public void onClick(View v) {
             if(!startFlag)
 
-                switch(spinnerDropdown.getSelectedItem().toString())
-                {
+            {
+                switch (spinnerDropdown.getSelectedItem().toString()) {
                     case "Long Oooo":
                         startFlag = true;
-                        longOoo.start();
-                        break;
+                        longOoo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mediaPlayer) {
+                                startFlag = false;
+                            }
+                        });
+                    longOoo.start();
+                    break;
                     case "Ooooo":
                         startFlag = true;
                         break;
@@ -65,15 +80,38 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
                         startFlag = true;
                         break;
                 }
+            }
 
 
-            else {
-                 //stop all mediaPlayers
-                    startFlag = false;
-                    longOoo.pause();
-                    longOoo.seekTo(0);
 
-                }
+
         }
     }
+
+    public class stopListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            if(startFlag)
+            {
+                longOoo.pause();
+                longOoo.seekTo(0);
+                startFlag = false;
+
+                //add all other mediaplayers when you get there
+            }
+        }
+    }
+
+    public class pauseListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v)
+        {
+            if(startFlag)
+            {
+                longOoo.pause();
+                startFlag = false;
+            }
+        }
+    }
+
 }
