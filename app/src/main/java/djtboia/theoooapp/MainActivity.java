@@ -18,13 +18,15 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
     ArrayAdapter adapter;
     Button btnPlay, btnStop, btnResume, btnPause;
     boolean startFlag;
-    MediaPlayer longOoo, shortOoo, threeOoo, telling;
+    int[] allOoos;
+    MediaPlayer oooPlayer = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startFlag = false;
-
+        allOoos = new int[1];
+        allOoos[0] = R.raw.oooolong;
         adapter = ArrayAdapter.createFromResource(this, R.array.spinner_options, android.R.layout.simple_spinner_item);
 
         spinnerDropdown = (Spinner) findViewById(R.id.spinner_dropdown);
@@ -39,7 +41,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
 
         btnPause = (Button) findViewById(R.id.btnPause);
         btnPause.setOnClickListener(new pauseListener());
-        longOoo = MediaPlayer.create(MainActivity.this, R.raw.oooolong);
+
     }
 
     @Override
@@ -64,13 +66,14 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
                 switch (spinnerDropdown.getSelectedItem().toString()) {
                     case "Long Oooo":
                         startFlag = true;
-                        longOoo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        oooPlayer = MediaPlayer.create(MainActivity.this, allOoos[0]);
+                        oooPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mediaPlayer) {
                                 startFlag = false;
                             }
                         });
-                    longOoo.start();
+                    oooPlayer.start();
                     break;
                     case "Ooooo":
                         startFlag = true;
@@ -95,8 +98,8 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         public void onClick(View v){
             if(startFlag)
             {
-                longOoo.pause();
-                longOoo.seekTo(0);
+                oooPlayer.pause();
+                oooPlayer.seekTo(0);
                 startFlag = false;
 
                 //add all other mediaplayers when you get there
@@ -110,7 +113,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         {
             if(startFlag)
             {
-                longOoo.pause();
+                oooPlayer.pause();
                 startFlag = false;
             }
         }
