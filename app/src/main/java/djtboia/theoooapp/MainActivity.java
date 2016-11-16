@@ -1,7 +1,7 @@
 package djtboia.theoooapp;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.app.Activity;
@@ -25,8 +25,10 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startFlag = false;
-        allOoos = new int[1];
+        allOoos = new int[3];
         allOoos[0] = R.raw.oooolong;
+        allOoos[1] = R.raw.oooo;
+        allOoos[2] = R.raw.telling;
         adapter = ArrayAdapter.createFromResource(this, R.array.spinner_options, android.R.layout.simple_spinner_item);
 
         spinnerDropdown = (Spinner) findViewById(R.id.spinner_dropdown);
@@ -67,22 +69,24 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
                     case "Long Oooo":
                         startFlag = true;
                         oooPlayer = MediaPlayer.create(MainActivity.this, allOoos[0]);
-                        oooPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mediaPlayer) {
-                                startFlag = false;
-                            }
-                        });
+                        oooPlayer.setOnCompletionListener(new compeletionListener());
+
                     oooPlayer.start();
                     break;
                     case "Ooooo":
                         startFlag = true;
+                        oooPlayer = MediaPlayer.create(MainActivity.this, allOoos[1]);
+                        oooPlayer.setOnCompletionListener(new compeletionListener());
+                        oooPlayer.start();
                         break;
                     case "Ooo Ooo Ooo":
                         startFlag = true;
                         break;
                     case "Ooooooo I'm tellinnnggggg":
                         startFlag = true;
+                        oooPlayer = MediaPlayer.create(MainActivity.this, allOoos[2]);
+                        oooPlayer.setOnCompletionListener(new compeletionListener());
+                        oooPlayer.start();
                         break;
                 }
             }
@@ -119,4 +123,11 @@ public class MainActivity extends Activity implements OnItemSelectedListener {
         }
     }
 
+    private class compeletionListener implements MediaPlayer.OnCompletionListener{
+        @Override
+        public void onCompletion(MediaPlayer mediaplayer)
+        {
+            startFlag = false;
+        }
+    }
 }
